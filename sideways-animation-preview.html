@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SIDEWAYS Animation Preview</title>
+    <link rel="stylesheet" href="./styles.css?v=142">
+    <style>
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: #050b16;
+        color: #f4f8ff;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+
+      .preview-controls {
+        position: fixed;
+        z-index: 13000;
+        top: 18px;
+        right: 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border: 1px solid rgba(255, 255, 255, .2);
+        border-radius: 14px;
+        background: rgba(5, 11, 22, .84);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, .36);
+        backdrop-filter: blur(10px);
+      }
+
+      .preview-controls span {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .preview-controls button {
+        min-height: 42px;
+        padding: 0 18px;
+        border: 1px solid #c6ffe0;
+        border-radius: 10px;
+        background: #f4f8ff;
+        color: #08152b;
+        font: inherit;
+        font-weight: 900;
+        cursor: pointer;
+        box-shadow: -3px 0 0 #21df7d, 3px 0 0 #ff3657;
+      }
+
+      .preview-controls button:hover,
+      .preview-controls button:focus-visible {
+        background: #fff;
+        outline: 3px solid rgba(33, 223, 125, .24);
+        outline-offset: 2px;
+      }
+
+      main {
+        max-width: 560px;
+        padding: 32px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>SIDEWAYS animation preview</h1>
+      <p>Each replay generates a new range-bound stock line, then marks its shared support and resistance.</p>
+    </main>
+    <div class="preview-controls">
+      <span>Standalone preview</span>
+      <button id="replaySidewaysAnimation" type="button">Replay animation</button>
+    </div>
+    <script src="./market-celebrations.js?v=8"></script>
+    <script src="./sideways-celebration.js?v=3"></script>
+    <script>
+      const replayButton = document.getElementById("replaySidewaysAnimation");
+      const replayAnimation = () => playCorrectSidewaysCelebration();
+      replayButton.addEventListener("click", replayAnimation);
+      window.addEventListener("load", () => window.setTimeout(replayAnimation, 120));
+    </script>
+  </body>
+</html>

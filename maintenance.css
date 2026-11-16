@@ -1,0 +1,86 @@
+/* Standalone outage surface: existing brand tokens without the app layout cascade. */
+.maintenance-page {
+  --ink: #08152b;
+  --muted: #667085;
+  --line: #ded6c7;
+  --paper: #f8f6f0;
+  --panel: #fffdfa;
+  --gold: #c99a3d;
+  --panel-soft: #f1ece1;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+.maintenance-page *, .maintenance-page *::before, .maintenance-page *::after { box-sizing: border-box; }
+.maintenance-page a { color: inherit; }
+.maintenance-page a:focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+.maintenance-page .maintenance-skip { position: absolute; top: 1rem; left: 1rem; z-index: 2; padding: .75rem 1rem; background: var(--ink); color: var(--panel); transform: translateY(-200%); }
+.maintenance-page .maintenance-skip:focus { transform: none; }
+.maintenance-page .maintenance-shell { width: min(100%, 80rem); min-height: 100vh; min-height: 100dvh; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 4rem); display: flex; flex-direction: column; }
+.maintenance-page .maintenance-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding-block: clamp(1.5rem, 4vh, 2.5rem); }
+.maintenance-page .maintenance-brand { display: inline-flex; align-items: center; min-height: 44px; border-radius: .25rem; }
+.maintenance-page .maintenance-brand img { display: block; width: 7rem; max-width: 100%; height: auto; }
+.maintenance-page .maintenance-badge { display: inline-flex; align-items: center; gap: .6rem; padding: .65rem .85rem; border: 1px solid var(--line); border-radius: 2rem; background: var(--panel); font-size: .6875rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.maintenance-page .maintenance-badge > span { width: .45rem; height: .45rem; flex: 0 0 auto; border-radius: 50%; background: var(--gold); }
+.maintenance-page .maintenance-main { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); padding-block: clamp(2rem, 7vh, 5rem) clamp(3rem, 9vh, 7rem); }
+.maintenance-page .maintenance-main:focus { outline: none; }
+.maintenance-page .maintenance-copy { min-width: 0; overflow-wrap: anywhere; }
+.maintenance-page .maintenance-eyebrow { margin: 0 0 1.3rem; color: var(--muted); font-size: .6875rem; line-height: 1.6; font-weight: 750; letter-spacing: .15em; text-transform: uppercase; }
+.maintenance-page h1 { margin: 0; font-size: clamp(1.9rem, 3.3vw, 2.9rem); font-weight: 750; line-height: 1.14; letter-spacing: -.045em; }
+.maintenance-page .maintenance-oops { display: block; margin-bottom: 1.25rem; font-size: clamp(5.5rem, 9vw, 8rem); font-weight: 850; line-height: .95; letter-spacing: -.075em; }
+.maintenance-page .maintenance-oops > span { color: var(--gold); }
+.maintenance-page .maintenance-description { max-width: 25rem; margin: 1.5rem 0 1.9rem; color: var(--muted); font-size: 1rem; line-height: 1.8; }
+.maintenance-page .maintenance-socials-heading { display: flex; align-items: center; gap: .65rem; margin: 0; font-size: .875rem; font-weight: 700; line-height: 1.6; }
+.maintenance-page .maintenance-socials-heading svg { flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.maintenance-page .maintenance-socials { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: .875rem; }
+.maintenance-page .maintenance-social-icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: .75rem; background: var(--panel); color: var(--ink); }
+.maintenance-page .maintenance-social-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.maintenance-page .maintenance-social-icon .social-icon-fill { fill: currentColor; stroke: none; }
+.maintenance-page .maintenance-note { max-width: 25rem; margin: 1rem 0 0; color: var(--muted); font-size: .75rem; line-height: 1.6; }
+.maintenance-page .maintenance-visual { min-width: 0; }
+.maintenance-page .maintenance-chart { overflow: hidden; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); box-shadow: 0 22px 58px rgba(8, 21, 43, .07); }
+.maintenance-page .maintenance-chart-header { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .5625rem; font-weight: 650; letter-spacing: .07em; text-transform: uppercase; }
+.maintenance-page .maintenance-window-dots { display: flex; flex: 0 0 auto; gap: .3rem; }
+.maintenance-page .maintenance-window-dots i { width: .4rem; height: .4rem; border-radius: 50%; background: var(--line); }
+.maintenance-page .maintenance-chart-header > span:nth-child(2) { flex: 1; min-width: 0; }
+.maintenance-page .maintenance-chart-header > svg { flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 2; }
+.maintenance-page .maintenance-market { display: block; width: 100%; height: auto; }
+.maintenance-page #maintenanceGrid path { stroke: var(--line); stroke-width: .7; opacity: .55; }
+.maintenance-page .maintenance-trend { stroke: var(--line); stroke-width: 2; stroke-dasharray: 4 7; }
+.maintenance-page .maintenance-candles { fill: #e8e1d3; stroke: #c4bba9; stroke-width: 1.5; }
+.maintenance-page .maintenance-tool-halo { fill: var(--paper); stroke: var(--line); stroke-dasharray: 3 6; }
+.maintenance-page .maintenance-tool-disc { fill: var(--ink); }
+.maintenance-page .maintenance-tool { stroke: var(--gold); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.maintenance-page .maintenance-spark { stroke: var(--gold); stroke-width: 2; stroke-linecap: round; }
+.maintenance-page .maintenance-chart-footer { display: flex; align-items: center; gap: .65rem; padding: 1rem; border-top: 1px solid var(--line); background: var(--panel-soft); font-size: .625rem; font-weight: 650; letter-spacing: .03em; }
+.maintenance-page .maintenance-repair-icon { display: grid; place-items: center; width: 1.3rem; height: 1.3rem; border: 1px solid var(--line); border-radius: .3rem; font-size: 1rem; }
+.maintenance-page .maintenance-chart-code { margin-left: auto; color: var(--muted); font-family: ui-monospace, monospace; font-size: .5625rem; letter-spacing: .1em; }
+.maintenance-page .maintenance-caption { display: flex; align-items: center; justify-content: center; gap: .6rem; margin: 1.4rem 0 0; color: var(--muted); font-size: .6875rem; line-height: 1.6; text-align: center; }
+.maintenance-page .maintenance-caption > span { width: 1rem; height: 1px; background: var(--gold); flex: 0 0 auto; }
+.maintenance-page .maintenance-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem 2rem; padding-block: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .6875rem; line-height: 1.7; }
+.maintenance-page .maintenance-footer p { margin: 0; }
+.maintenance-page .maintenance-footer p > span { padding-inline: .65rem; color: var(--line); }
+.maintenance-page .maintenance-footer nav { display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; }
+.maintenance-page .maintenance-footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+@media (hover: hover) {
+  .maintenance-page .maintenance-footer a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: .25em; }
+}
+@media (max-width: 47rem) {
+  .maintenance-page .maintenance-main { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; padding-block: 2rem 3rem; }
+  .maintenance-page .maintenance-copy { max-width: 32rem; }
+  .maintenance-page h1 { font-size: clamp(1.9rem, 5.5vw, 2.9rem); }
+  .maintenance-page .maintenance-oops { font-size: clamp(5.5rem, 15vw, 7rem); }
+  .maintenance-page .maintenance-description { max-width: 29rem; }
+  .maintenance-page .maintenance-visual { width: min(100%, 32rem); justify-self: center; }
+  .maintenance-page .maintenance-footer { align-items: flex-start; }
+}
+@media (max-width: 23rem) {
+  .maintenance-page .maintenance-oops { font-size: min(5.5rem, 23vw); }
+  .maintenance-page .maintenance-header { gap: .75rem; }
+  .maintenance-page .maintenance-brand img { width: 5.5rem; }
+  .maintenance-page .maintenance-badge { font-size: .5625rem; padding: .6rem; gap: .4rem; }
+  .maintenance-page .maintenance-break { display: none; }
+  .maintenance-page .maintenance-chart-header { gap: .6rem; padding: .8rem; }
+}

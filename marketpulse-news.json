@@ -1,0 +1,293 @@
+[
+  {
+    "id": "fed-fomc-july-2026",
+    "tag": "Monetary policy",
+    "ticker": "TLT",
+    "source": "Federal Reserve",
+    "published": "Jul 29, 2026",
+    "verified": true,
+    "title": "Federal Reserve issues July FOMC statement",
+    "summary": "Read the committee's policy decision and reasoning directly from the central bank before comparing the reaction in bonds and rate-sensitive equities.",
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm",
+    "prompt": "Which part of the statement could change rate expectations, and did TLT confirm that interpretation?",
+    "practice": "Practice TLT",
+    "eventType": "Rate decision",
+    "sectors": [
+      "Fixed income",
+      "Financials"
+    ],
+    "importance": "high",
+    "date": "2026-07-29"
+  },
+  {
+    "id": "bea-gdp-q2-2026",
+    "tag": "Macro",
+    "ticker": "SPY",
+    "source": "U.S. BEA",
+    "published": "Jul 30, 2026",
+    "verified": true,
+    "title": "GDP: advance estimate for the second quarter of 2026",
+    "summary": "The Bureau of Economic Analysis reports the official advance estimate for U.S. growth, spending, investment, trade, and prices.",
+    "url": "https://www.bea.gov/news/2026/gdp-advance-estimate-2nd-quarter-2026",
+    "prompt": "Separate the headline GDP rate from the underlying contributions. Which component changed the market story?",
+    "practice": "Practice SPY",
+    "eventType": "GDP release",
+    "sectors": [
+      "Broad market"
+    ],
+    "importance": "high",
+    "date": "2026-07-30"
+  },
+  {
+    "id": "bls-cpi-june-2026",
+    "tag": "Inflation",
+    "ticker": "TIP",
+    "source": "U.S. BLS",
+    "published": "Jul 14, 2026",
+    "verified": true,
+    "title": "Consumer Price Index: June 2026 results",
+    "summary": "The official CPI release provides headline, core, monthly, and twelve-month inflation measures with detailed category tables.",
+    "url": "https://www.bls.gov/news.release/archives/cpi_07142026.htm",
+    "prompt": "Was the surprise broad-based or driven by one category, and how would that affect an inflation-sensitive chart?",
+    "practice": "Practice TIP",
+    "eventType": "Inflation release",
+    "sectors": [
+      "Fixed income",
+      "Consumer"
+    ],
+    "importance": "high",
+    "date": "2026-07-14"
+  },
+  {
+    "id": "bls-jobs-june-2026",
+    "tag": "Labor",
+    "ticker": "SPY",
+    "source": "U.S. BLS",
+    "published": "Jul 2, 2026",
+    "verified": true,
+    "title": "The Employment Situation: June 2026",
+    "summary": "The Bureau of Labor Statistics combines household and establishment surveys into the official monthly labor-market release.",
+    "url": "https://www.bls.gov/news.release/archives/empsit_07022026.htm",
+    "prompt": "Compare payrolls, unemployment, participation, and revisions instead of reacting to only one number.",
+    "practice": "Practice SPY",
+    "eventType": "Jobs report",
+    "sectors": [
+      "Broad market",
+      "Consumer"
+    ],
+    "importance": "high",
+    "date": "2026-07-02"
+  },
+  {
+    "id": "eia-petroleum-july-2026",
+    "tag": "Energy",
+    "ticker": "CL=F",
+    "source": "U.S. EIA",
+    "published": "Jul 29, 2026",
+    "verified": true,
+    "title": "Weekly Petroleum Status Report",
+    "summary": "EIA's primary weekly report covers U.S. crude inventories, refinery activity, imports, exports, production, and fuel stocks.",
+    "url": "https://www.eia.gov/petroleum/supply/weekly/index.php",
+    "prompt": "Did inventories, production, and refinery utilization tell the same story—or send conflicting signals?",
+    "practice": "Practice oil",
+    "eventType": "Inventory report",
+    "sectors": [
+      "Energy"
+    ],
+    "importance": "standard",
+    "date": "2026-07-29"
+  },
+  {
+    "id": "microsoft-fy26-q4",
+    "tag": "Earnings",
+    "ticker": "MSFT",
+    "source": "Microsoft IR",
+    "published": "Jul 29, 2026",
+    "verified": true,
+    "title": "Microsoft fiscal 2026 fourth-quarter results",
+    "summary": "Microsoft's investor-relations release reports revenue, operating income, segment performance, and management commentary at the source.",
+    "url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/press-release-webcast",
+    "prompt": "Compare total growth with cloud and AI growth, then check whether price confirmed the earnings narrative.",
+    "practice": "Practice MSFT",
+    "eventType": "Earnings release",
+    "sectors": [
+      "Technology"
+    ],
+    "importance": "standard",
+    "date": "2026-07-29"
+  },
+  {
+    "id": "apple-fy26-q3",
+    "tag": "Earnings",
+    "ticker": "AAPL",
+    "source": "Apple Newsroom",
+    "published": "Jul 30, 2026",
+    "verified": true,
+    "title": "Apple reports third-quarter results",
+    "summary": "Apple's official release and investor materials provide reported revenue, earnings, capital returns, and management remarks.",
+    "url": "https://www.apple.com/newsroom/2026/07/apple-reports-third-quarter-results/",
+    "prompt": "Which reported metric matters most to expectations, and did the gap hold after the initial reaction?",
+    "practice": "Practice AAPL",
+    "eventType": "Earnings release",
+    "sectors": [
+      "Technology"
+    ],
+    "importance": "standard",
+    "date": "2026-07-30"
+  },
+  {
+    "id": "tesla-q2-2026",
+    "tag": "Earnings",
+    "ticker": "TSLA",
+    "source": "Tesla IR",
+    "published": "Jul 22, 2026",
+    "verified": true,
+    "title": "Tesla releases second-quarter 2026 financial results",
+    "summary": "Tesla's investor-relations newsroom links the company's quarterly update, webcast, production data, and filings.",
+    "url": "https://ir.tesla.com/press?view=all",
+    "prompt": "Keep deliveries, margins, cash flow, and forward guidance separate when judging the reaction.",
+    "practice": "Practice TSLA",
+    "eventType": "Earnings release",
+    "sectors": [
+      "Consumer discretionary"
+    ],
+    "importance": "standard",
+    "date": "2026-07-22"
+  },
+  {
+    "id": "nvidia-fy27-q1",
+    "tag": "Earnings",
+    "ticker": "NVDA",
+    "source": "NVIDIA IR",
+    "published": "May 20, 2026",
+    "verified": true,
+    "title": "NVIDIA first-quarter fiscal 2027 results",
+    "summary": "NVIDIA's official earnings release covers reported results, platform performance, outlook, and capital returns.",
+    "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx",
+    "prompt": "Distinguish reported growth from guidance, then look for follow-through instead of assuming a beat guarantees an up move.",
+    "practice": "Practice NVDA",
+    "eventType": "Earnings release",
+    "sectors": [
+      "Semiconductors"
+    ],
+    "importance": "standard",
+    "date": "2026-05-20"
+  },
+  {
+    "id": "sec-market-updates",
+    "tag": "Regulation",
+    "ticker": "SPY",
+    "source": "U.S. SEC",
+    "published": "Official feed",
+    "verified": true,
+    "title": "SEC press releases and market-structure updates",
+    "summary": "The Securities and Exchange Commission's newsroom is the primary source for rule proposals, enforcement announcements, and investor-protection updates.",
+    "url": "https://www.sec.gov/newsroom/press-releases",
+    "prompt": "Is the item a proposal, final rule, enforcement action, or event notice? The category changes how markets should interpret it.",
+    "practice": "Practice SPY",
+    "eventType": "Regulatory updates",
+    "sectors": [
+      "Financials"
+    ],
+    "importance": "standard",
+    "date": null
+  },
+  {
+    "id": "cftc-cot",
+    "tag": "Positioning",
+    "ticker": "GC=F",
+    "source": "U.S. CFTC",
+    "published": "Weekly official data",
+    "verified": true,
+    "title": "Commitments of Traders reports",
+    "summary": "CFTC's weekly reports break down futures and options positioning across commercial and non-commercial participant categories.",
+    "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+    "prompt": "Treat positioning as context rather than a timing signal. Is price confirming or diverging from the crowded side?",
+    "practice": "Practice gold",
+    "eventType": "Positioning report",
+    "sectors": [
+      "Commodities"
+    ],
+    "importance": "standard",
+    "date": null
+  },
+  {
+    "id": "treasury-data",
+    "tag": "Rates",
+    "ticker": "TLT",
+    "source": "U.S. Treasury",
+    "published": "Official data hub",
+    "verified": true,
+    "title": "Treasury interest-rate statistics",
+    "summary": "The U.S. Treasury publishes official daily yield-curve, real-yield, and bill-rate data used throughout fixed-income markets.",
+    "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates",
+    "prompt": "Compare moves across maturities. Is the curve steepening, flattening, or shifting almost in parallel?",
+    "practice": "Practice TLT",
+    "eventType": "Yield data",
+    "sectors": [
+      "Fixed income"
+    ],
+    "importance": "standard",
+    "date": null
+  },
+  {
+    "id": "bls-cpi-oct-2026",
+    "tag": "Inflation",
+    "ticker": "TIP",
+    "source": "U.S. BLS",
+    "published": "Nov 10, 2026",
+    "verified": true,
+    "title": "Consumer Price Index: October 2026 results",
+    "summary": "The official October inflation release breaks out price changes, including shelter and energy.",
+    "url": "https://www.bls.gov/news.release/archives/cpi_11102026.htm",
+    "prompt": "Was the surprise broad-based or driven by one category, and how would that affect an inflation-sensitive chart?",
+    "practice": "Practice TIP",
+    "eventType": "Inflation release",
+    "sectors": [
+      "Fixed income",
+      "Consumer"
+    ],
+    "importance": "high",
+    "date": "2026-11-10"
+  },
+  {
+    "id": "fed-fomc-oct-2026",
+    "tag": "Monetary policy",
+    "ticker": "TLT",
+    "source": "Federal Reserve",
+    "published": "Oct 28, 2026",
+    "verified": true,
+    "title": "Federal Reserve holds its target rate in October",
+    "summary": "The committee kept its target range steady and described the growth and inflation readings behind the decision.",
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+    "prompt": "Which part of the statement could change rate expectations, and did TLT confirm that interpretation?",
+    "practice": "Practice TLT",
+    "eventType": "Rate decision",
+    "sectors": [
+      "Fixed income",
+      "Financials"
+    ],
+    "importance": "high",
+    "date": "2026-10-28",
+    "policyAction": "Hold"
+  },
+  {
+    "id": "apple-fy26-q4",
+    "tag": "Earnings",
+    "ticker": "AAPL",
+    "source": "Apple Newsroom",
+    "published": "Nov 2, 2026",
+    "verified": true,
+    "title": "Apple reports fourth-quarter results",
+    "summary": "Apple’s newsroom release covers the quarter’s product and services results and explains reported margin effects.",
+    "url": "https://www.apple.com/newsroom/2026/11/apple-reports-fourth-quarter-results/",
+    "prompt": "Which reported metric matters most to expectations, and did the gap hold after the initial reaction?",
+    "practice": "Practice AAPL",
+    "eventType": "Earnings release",
+    "sectors": [
+      "Technology"
+    ],
+    "importance": "standard",
+    "date": "2026-11-02"
+  }
+]

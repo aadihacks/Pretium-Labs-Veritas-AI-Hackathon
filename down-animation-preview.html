@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DOWN Animation Preview</title>
+    <link rel="stylesheet" href="./styles.css?v=129">
+    <style>
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: #050b16;
+        color: #fff7f8;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .preview-controls {
+        position: fixed;
+        z-index: 13000;
+        top: 18px;
+        right: 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border: 1px solid rgba(255, 255, 255, .2);
+        border-radius: 14px;
+        background: rgba(5, 11, 22, .82);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, .36);
+        backdrop-filter: blur(10px);
+      }
+
+      .preview-controls span {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .preview-controls button {
+        min-height: 42px;
+        padding: 0 18px;
+        border: 1px solid #ff667e;
+        border-radius: 10px;
+        background: #ff3f5d;
+        color: #fff;
+        font: inherit;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .preview-controls button:hover,
+      .preview-controls button:focus-visible {
+        background: #ff5872;
+        outline: 3px solid rgba(255, 88, 114, .28);
+        outline-offset: 2px;
+      }
+
+      main {
+        max-width: 560px;
+        padding: 32px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>DOWN animation preview</h1>
+      <p>This page runs the exact animation used by a correct DOWN prediction.</p>
+    </main>
+    <div class="preview-controls">
+      <span>Standalone preview</span>
+      <button id="replayDownAnimation" type="button">Replay animation</button>
+    </div>
+    <script src="./down-celebration.js?v=11"></script>
+    <script>
+      const replayButton = document.getElementById("replayDownAnimation");
+      const replayAnimation = () => playCorrectDownCelebration();
+      replayButton.addEventListener("click", replayAnimation);
+      window.addEventListener("load", () => window.setTimeout(replayAnimation, 120));
+    </script>
+  </body>
+</html>

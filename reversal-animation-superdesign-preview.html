@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pretium Labs — Correct Reversal Celebration</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --night: #030812;
+      --night-mid: #091426;
+      --night-red: #18060d;
+      --ink: #f8f3e8;
+      --muted: #b9c0cc;
+      --line: #2c3850;
+      --panel: #0b172d;
+      --green: #21df7d;
+      --red: #ff3657;
+      --gold: #e2bd68;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--night); }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: var(--night); color: var(--ink); }
+
+    .market-grid {
+      background-image:
+        linear-gradient(rgba(142, 166, 200, .11) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(142, 166, 200, .11) 1px, transparent 1px);
+      background-size: clamp(46px, 7vw, 96px) clamp(42px, 9vh, 78px);
+    }
+
+    .celebration {
+      --line-width: min(100%, 180vh);
+      --line-width: min(100%, 180dvh);
+      position: fixed;
+      z-index: 12010;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      isolation: isolate;
+      pointer-events: none;
+      opacity: 0;
+      background:
+        radial-gradient(circle at 18% 24%, rgba(33, 223, 125, .13), transparent 26%),
+        radial-gradient(circle at 80% 70%, rgba(255, 54, 87, .18), transparent 30%),
+        linear-gradient(155deg, var(--night) 0%, var(--night-mid) 48%, var(--night-red) 100%);
+    }
+
+    .celebration::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .22;
+      background-image:
+        linear-gradient(rgba(142, 166, 200, .13) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(142, 166, 200, .13) 1px, transparent 1px);
+      background-size: clamp(46px, 7vw, 96px) clamp(42px, 9vh, 78px);
+    }
+
+    .line-anchor {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .line-stage {
+      width: var(--line-width);
+      aspect-ratio: 1200 / 620;
+      transform-origin: center;
+    }
+
+    .line-spin {
+      width: 100%;
+      height: 100%;
+    }
+
+    .line-stage svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+    .market-trace {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 7px;
+      stroke: var(--green);
+    }
+
+    .leading-flash {
+      fill: #fff;
+      stroke: var(--green);
+      stroke-width: 4;
+      opacity: 0;
+      filter: drop-shadow(0 0 5px rgba(255,255,255,.98)) drop-shadow(0 0 18px rgba(33,223,125,.92));
+    }
+
+    .status-pill {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 13px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      opacity: 0;
+      color: rgba(248,243,232,.84);
+      background: rgba(3,8,18,.58);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      transform: translate(-50%, 8px);
+      backdrop-filter: blur(8px);
+    }
+
+    .status-pill span { width: 7px; height: 7px; border-radius: 999px; background: var(--red); box-shadow: 0 0 12px rgba(255,54,87,.9); }
+
+    #replayReversal { bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)); min-height: 44px; }
+    #reversalChoice:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+
+    .celebration.is-playing { animation: overlay-sequence 4.6s both; }
+    .celebration.is-playing .line-stage { animation: seesaw-drop 4.6s cubic-bezier(.22,.8,.25,1) both; will-change: transform; }
+    .celebration.is-playing .market-trace { animation: trace-sequence 4.6s linear both; }
+    .celebration.is-playing .leading-flash { animation: head-visibility 4.6s linear both; }
+    .celebration.is-playing .status-pill { animation: status-sequence 4.6s cubic-bezier(.16,1,.3,1) both; }
+
+    @keyframes overlay-sequence {
+      0% { opacity: 0; transform: scale(1.018); filter: brightness(1); }
+      4.3% { opacity: 1; transform: scale(1); }
+      94% { opacity: 1; filter: brightness(1); }
+      100% { opacity: 0; filter: brightness(.5) saturate(.35); }
+    }
+
+    @keyframes trace-sequence {
+      0%, 4% { stroke-dasharray: var(--trace-length); stroke-dashoffset: var(--trace-length); stroke: var(--green); filter: drop-shadow(0 0 7px rgba(33,223,125,.56)) drop-shadow(0 0 17px rgba(33,223,125,.34)); }
+      20% { stroke-dasharray: var(--trace-length); stroke-dashoffset: 0; stroke: var(--green); filter: drop-shadow(0 0 9px rgba(33,223,125,.56)); }
+      21%, 60% { stroke-dasharray: none; stroke-dashoffset: 0; stroke: var(--green); filter: drop-shadow(0 0 9px rgba(33,223,125,.56)); }
+      65% { stroke-dashoffset: 0; stroke: var(--red); filter: drop-shadow(0 0 9px rgba(255,54,87,.72)) drop-shadow(0 0 22px rgba(255,54,87,.48)); }
+      84% { stroke-dashoffset: 0; stroke: var(--red); filter: drop-shadow(0 0 15px rgba(255,54,87,.92)) drop-shadow(0 0 34px rgba(255,54,87,.62)); }
+      100% { stroke-dashoffset: 0; stroke: var(--red); filter: drop-shadow(0 0 7px rgba(255,54,87,.45)); }
+    }
+
+    @keyframes seesaw-drop {
+      0%, 70% { transform: skewY(0deg); }
+      84% { transform: skewY(42deg); }
+      89% { transform: skewY(38deg); }
+      93%, 100% { transform: skewY(39.3deg); }
+    }
+
+    @keyframes head-visibility {
+      0%, 3.9% { opacity: 0; }
+      4%, 20% { opacity: 1; }
+      21%, 100% { opacity: 0; }
+    }
+
+    @keyframes status-sequence {
+      0%, 82% { opacity: 0; transform: translate(-50%, 8px); }
+      88% { opacity: 1; transform: translate(-50%, 0); }
+      94% { opacity: 1; transform: translate(-50%, 0); }
+      100% { opacity: 0; transform: translate(-50%, -4px); }
+    }
+
+    @media (max-width: 900px) {
+      .market-trace { stroke-width: 8px; }
+      #previewRoot { height: auto; min-height: 100vh; min-height: 100dvh; overflow: visible; }
+      #previewHeader { height: auto; min-height: 4rem; flex-wrap: wrap; gap: .75rem; }
+      #previewMain { grid-template-columns: minmax(0, 1fr); height: auto; min-height: 0; padding-bottom: 1rem; }
+      #previewChart { min-height: clamp(220px, 45vh, 460px); }
+      #replayReversal { position: relative; left: auto; bottom: auto; width: max-content; margin: 0 auto 1.5rem; transform: none; }
+    }
+
+    @media (max-width: 480px) {
+      .market-trace { stroke-width: 11px; }
+      #previewHeader { padding: .75rem; }
+      #previewMain { padding: .75rem; gap: .75rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .celebration.is-playing { animation: reduced-overlay 1.45s ease both; }
+      .celebration.is-playing .line-stage { animation: reduced-drop 1.45s ease both; }
+      .celebration.is-playing .market-trace { animation: reduced-trace 1.45s ease both; }
+      .celebration.is-playing .leading-flash { animation: none; opacity: 0; }
+      .celebration.is-playing .status-pill { animation: reduced-status 1.45s ease both; }
+      @keyframes reduced-overlay { 0% { opacity: 0; } 12%, 84% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes reduced-drop { 0%, 58% { transform: skewY(0deg); } 76%, 100% { transform: skewY(39.3deg); } }
+      @keyframes reduced-trace { 0%, 46% { stroke-dasharray: none; stroke-dashoffset: 0; stroke: var(--green); } 54%, 100% { stroke-dasharray: none; stroke-dashoffset: 0; stroke: var(--red); } }
+      @keyframes reduced-status { 0%, 70% { opacity: 0; } 78%, 88% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
+    }
+  </style>
+</head>
+<body>
+  <div id="previewRoot" class="relative h-screen min-h-[640px] w-full overflow-hidden bg-[#061023] text-[#f8f3e8]">
+    <div class="absolute inset-0 market-grid opacity-35"></div>
+
+    <header id="previewHeader" class="relative z-10 flex h-16 items-center justify-between border-b border-[#2c3850] bg-[#0b172d]/95 px-6 shadow-xl">
+      <div class="flex items-center gap-4">
+        <div>
+          <div class="text-sm font-extrabold tracking-tight">Pretium Labs</div>
+          <div class="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8e9ab0]">Market literacy studio</div>
+        </div>
+        <div class="h-7 w-px bg-[#2c3850]"></div>
+        <span class="rounded-full border border-[#e2bd68]/30 bg-[#e2bd68]/10 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#f2d887]">Free Play</span>
+      </div>
+      <div class="flex items-center gap-5 text-xs text-[#b9c0cc]">
+        <span class="flex items-center gap-2"><iconify-icon icon="lucide:flame" class="text-[#e2bd68]"></iconify-icon><b class="text-[#f8f3e8]">7</b> streak</span>
+        <span class="flex items-center gap-2"><iconify-icon icon="lucide:zap" class="text-[#e2bd68]"></iconify-icon><b class="text-[#f8f3e8]">2,480</b> XP</span>
+      </div>
+    </header>
+
+    <main id="previewMain" class="relative z-10 grid h-[calc(100vh-4rem)] min-h-[576px] grid-cols-[minmax(0,1fr)_340px] gap-5 p-5">
+      <section id="previewChart" class="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#2c3850] bg-[#0b172d] shadow-2xl">
+        <div class="flex items-center justify-between border-b border-[#2c3850] px-5 py-4">
+          <div>
+            <div class="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#e2bd68]">Chart challenge</div>
+            <div class="mt-1 flex items-baseline gap-2"><strong class="text-lg">AAPL</strong><span class="text-xs text-[#8e9ab0]">1D</span></div>
+          </div>
+          <div class="flex items-center gap-2 rounded-lg border border-[#2c3850] bg-[#061023] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-[#8e9ab0]"><span class="h-2 w-2 rounded-full bg-[#e2bd68]"></span>Awaiting call</div>
+        </div>
+        <div class="market-grid relative flex-1 overflow-hidden">
+          <svg class="absolute inset-0 h-full w-full opacity-55" viewBox="0 0 1000 540" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M-20 350 L70 330 L135 372 L210 302 L292 332 L370 244 L448 275 L530 211 L612 252 L690 172" fill="none" stroke="#e2bd68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+            <line x1="690" y1="0" x2="690" y2="540" stroke="#e2bd68" stroke-width="2" stroke-dasharray="5 8" opacity=".65"></line>
+            <rect x="690" y="0" width="330" height="540" fill="#061023" opacity=".88"></rect>
+          </svg>
+        </div>
+      </section>
+
+      <aside class="flex flex-col rounded-2xl border border-[#2c3850] bg-[#0b172d] p-5 shadow-2xl">
+        <div class="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#e2bd68]">Pick the move</div>
+        <h1 class="mt-2 text-xl font-extrabold tracking-tight">What happened next?</h1>
+        <p class="mt-2 text-sm leading-6 text-[#8e9ab0]">Choose the market behavior that best completes the hidden chart.</p>
+        <div class="mt-5 grid grid-cols-2 gap-2.5">
+          <button type="button" class="rounded-xl border border-[#2c3850] bg-[#061023] px-3 py-3 text-left text-xs font-bold text-[#b9c0cc]">Up</button>
+          <button type="button" class="rounded-xl border border-[#2c3850] bg-[#061023] px-3 py-3 text-left text-xs font-bold text-[#b9c0cc]">Down</button>
+          <button type="button" class="rounded-xl border border-[#2c3850] bg-[#061023] px-3 py-3 text-left text-xs font-bold text-[#b9c0cc]">Sideways</button>
+          <button type="button" class="rounded-xl border border-[#2c3850] bg-[#061023] px-3 py-3 text-left text-xs font-bold text-[#b9c0cc]">Breakout</button>
+          <button id="reversalChoice" type="button" class="col-span-2 flex items-center justify-between rounded-xl border border-[#21df7d]/65 bg-[#21df7d]/10 px-3 py-3 text-left text-xs font-extrabold text-[#8ff0bd] shadow-[0_0_24px_rgba(33,223,125,.1)]">
+            <span>Reversal</span>
+            <span class="flex items-center gap-1 text-base" aria-hidden="true"><span>↗</span><span class="text-[#ff3657]">↘</span></span>
+          </button>
+          <button type="button" class="col-span-2 rounded-xl border border-[#2c3850] bg-[#061023] px-3 py-3 text-left text-xs font-bold text-[#b9c0cc]">Volatility spike</button>
+        </div>
+        <div class="mt-auto rounded-xl border border-[#2c3850] bg-[#061023] p-4">
+          <div class="flex items-center gap-2 text-xs font-extrabold text-[#8ff0bd]"><iconify-icon icon="lucide:check-circle-2"></iconify-icon>Correct call: Reversal</div>
+          <p class="mt-2 text-xs leading-5 text-[#8e9ab0]">The prior rise lost follow-through and changed direction after exhaustion.</p>
+        </div>
+      </aside>
+    </main>
+
+    <button id="replayReversal" type="button" class="fixed bottom-6 left-1/2 z-[13000] flex -translate-x-1/2 items-center gap-2 rounded-xl border border-[#ff3657]/60 bg-[#030812]/90 px-4 py-3 text-xs font-extrabold text-[#fff7f8] shadow-[0_12px_36px_rgba(0,0,0,.45)] backdrop-blur-md transition hover:bg-[#18060d] focus:outline-none focus:ring-4 focus:ring-[#ff3657]/25">
+      <iconify-icon icon="lucide:rotate-ccw"></iconify-icon>
+      Replay reversal
+    </button>
+  </div>
+
+  <script src="./market-celebrations.js?v=8"></script>
+  <script>
+    const playReversalCelebration = () => playCorrectMarketCelebration("Reversal");
+    document.getElementById("replayReversal").addEventListener("click", playReversalCelebration);
+    document.getElementById("reversalChoice").addEventListener("click", playReversalCelebration);
+    window.addEventListener("load", () => window.setTimeout(playReversalCelebration, 180));
+  </script>
+</body>
+</html>

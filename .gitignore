@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+.DS_Store
+Thumbs.db
+*.log
+*.zip
+pretiumlabs-data-*.json
+.local-feedback/
+.local-data/
+.superdesign/tmp/

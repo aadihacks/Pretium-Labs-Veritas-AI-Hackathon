@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pretium Labs</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/pretiumlabs-mark.svg" />
+    <link rel="stylesheet" href="./styles.css?v=417" />
+  </head>
+  <body class="home-mode" data-theme="light">
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+    <div class="cache-status" id="cacheStatus" hidden>Generated preview charts are ready. Progress is saved in this browser.</div>
+    <div class="market-backdrop" aria-hidden="true"></div>
+    <div class="site-crosshair" id="siteCrosshair" aria-hidden="true">
+      <span class="market-crosshair market-crosshair-x"></span>
+      <span class="market-crosshair market-crosshair-y"></span>
+    </div>
+    <div class="round-modal hidden" id="roundModal" role="dialog" aria-modal="false" aria-labelledby="roundTitle" aria-describedby="roundText">
+      <div class="round-card-stage">
+        <section class="round-card">
+        <div class="round-head">
+          <span class="round-kicker" id="roundKicker">Mode preview</span>
+          <div class="round-actions round-head-actions">
+            <button id="roundStart" type="button">Open Free Play</button>
+          </div>
+        </div>
+        <div class="round-pages-shell">
+          <div class="round-pages-viewport" id="roundPagesViewport" tabindex="-1">
+            <section class="round-standard-page">
+              <h2 id="roundTitle">Free Play</h2>
+              <p id="roundText">Choose a market, read the chart, then make the call from the docked practice panel.</p>
+              <ul id="roundBullets" class="round-bullets"></ul>
+              <section class="round-gallery" aria-labelledby="roundGalleryTitle">
+                <div class="round-gallery-head">
+                  <strong id="roundGalleryTitle">Gallery</strong>
+                  <small>Photos coming soon</small>
+                </div>
+                <div class="round-gallery-grid">
+                  <div class="round-gallery-slot" role="img" aria-label="Gallery photo placeholder 1"><span>Photo 01</span></div>
+                  <div class="round-gallery-slot" role="img" aria-label="Gallery photo placeholder 2"><span>Photo 02</span></div>
+                  <div class="round-gallery-slot" role="img" aria-label="Gallery photo placeholder 3"><span>Photo 03</span></div>
+                </div>
+              </section>
+            </section>
+          </div>
+        </div>
+        </section>
+      </div>
+    </div>
+    <div class="level-modal hidden" id="levelModal" role="dialog" aria-modal="true" aria-labelledby="levelTitle">
+      <section class="level-card">
+        <div class="level-head">
+          <span>Pretium Labs Levels</span>
+          <button id="levelClose" type="button">Close</button>
+        </div>
+        <h2 id="levelTitle">Five levels. Twenty increments. Six ranks.</h2>
+        <p id="levelSummary">Every four increments unlocks the next level, from Copper 1 through Copper 5, then Bronze 1. Each rank contains 20 increments. Rewards unlock at levels 1 and 3.</p>
+        <div class="level-current" id="levelCurrent"></div>
+        <div class="level-list" id="levelList"></div>
+      </section>
+    </div>
+    <div class="account-modal hidden" id="accountModal" role="dialog" aria-modal="true" aria-label="Progress and rewards">
+      <section class="progress-card">
+        <div class="progress-scroll">
+        <div class="coin-wallet" id="coinWalletSummary" hidden><span><span class="gold-coin" aria-hidden="true">$</span> Coins</span><strong id="coinBalance" aria-live="polite">0</strong></div>
+        <div class="progress-head">
+          <section class="rank-road" aria-label="Rank progression">
+            <div class="rank-road-heading"><strong>Rank road</strong><small>20 increments · 5 levels per rank</small></div>
+            <div class="rank-road-viewport" id="rankRoadViewport" tabindex="0" role="region" aria-label="Rank progression. Scroll horizontally or use left and right arrow keys to browse levels.">
+              <div class="rank-road-track" id="rankRoadTrack" role="list"></div>
+            </div>
+          </section>
+        </div>
+        <section class="account-rewards" id="accountRewards" aria-labelledby="dailyQuestTitle" hidden></section>
+        <div id="accountPanel" class="account-panel"></div>
+        </div>
+      </section>
+    </div>
+    <div class="account-edit-modal nickname-modal hidden" id="nicknameModal" role="dialog" aria-modal="true" aria-labelledby="nicknameTitle">
+      <section class="account-edit-card nickname-card">
+        <header class="account-edit-head"><h2 id="nicknameTitle">New Nickname</h2><p id="nicknameHelp">Any changes will cost you 50 Coins.</p></header>
+        <form class="account-edit-form" id="nicknameForm">
+          <div class="nickname-input-row">
+            <div class="nickname-input-shell">
+              <div class="nickname-text-viewport" id="nicknameTextViewport">
+                <input id="nicknameInput" name="nickname" type="text" autocomplete="nickname" maxlength="15" aria-label="New nickname" aria-describedby="nicknameHelp nicknameCount nicknameError" required />
+              </div>
+              <span class="nickname-counter" id="nicknameCount" role="status" aria-live="polite" aria-atomic="true">0/15</span>
+            </div>
+            <button class="nickname-save" type="submit" aria-label="Save nickname" title="Save nickname"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg></button>
+            <button class="nickname-cancel" id="nicknameCancel" type="button" aria-label="Cancel nickname edit" title="Cancel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+          </div>
+          <p class="account-edit-error" id="nicknameError" role="alert" hidden></p>
+        </form>
+      </section>
+    </div>
+    <div class="daily-calendar-modal hidden" id="dailyCalendarModal" role="dialog" aria-modal="true" aria-labelledby="dailyCalendarTitle">
+      <section class="daily-calendar-card">
+        <div class="daily-calendar-head">
+          <div>
+            <span>Daily archive</span>
+            <h2 id="dailyCalendarTitle">Your month</h2>
+          </div>
+          <button id="dailyCalendarClose" type="button">Close</button>
+        </div>
+        <div class="daily-calendar-nav">
+          <button id="dailyCalendarPrev" type="button" aria-label="Previous month">&larr;</button>
+          <strong id="dailyCalendarMonth"></strong>
+          <button id="dailyCalendarNext" type="button" aria-label="Next month">&rarr;</button>
+        </div>
+        <div class="daily-calendar-weekdays" aria-hidden="true">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div class="daily-calendar-grid" id="dailyCalendarGrid"></div>
+        <div class="daily-calendar-legend">
+          <span class="correct">Correct</span>
+          <span class="missed">Reviewed</span>
+          <span class="open">Available</span>
+          <span class="locked">Future</span>
+        </div>
+      </section>
+    </div>
+    <div class="app">
+      <aside class="rail" id="sideMenu">
+        <button class="brand" id="homeLogo" type="button" aria-label="Pretium Labs home">
+          <span class="mark"><img src="./assets/pretiumlabs-mark.svg" alt="" /></span>
+          <span>
+            <strong>Pretium Labs</strong>
+            <small>Market literacy studio</small>
+          </span>
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-controls="sideMenu" aria-expanded="false">
+          <span>Explore Pretium Labs</span><b aria-hidden="true">+</b>
+        </button>
+        <nav class="nav-folders" aria-label="Pretium Labs sections">
+          <button class="nav nav-home active" data-mode="home">Home</button>
+          <a class="learn-section-link" href="/learn">
+            <span>Learn</span><span class="learn-ai-mark"><span aria-hidden="true">✦</span> AI</span>
+          </a>
+          <details class="nav-folder" open>
+            <summary>Play</summary>
+            <div class="nav-folder-items">
+              <button class="nav" data-mode="ranked">Ranked</button>
+            </div>
+          </details>
+          <details class="nav-folder" open>
+            <summary>Practice</summary>
+            <div class="nav-folder-items">
+              <button class="nav" data-mode="free">Free Play</button>
+              <button class="nav" data-mode="daily">Daily</button>
+            </div>
+          </details>
+          <details class="nav-folder">
+            <summary>Trading Lab</summary>
+            <div class="nav-folder-items">
+              <button class="nav" data-mode="paper">Paper Trading</button>
+              <button class="nav" type="button" data-mode="quant">
+                <span>Quant Lab</span><span class="learn-ai-mark"><span aria-hidden="true">✦</span> AI</span>
+              </button>
+              <button class="nav" data-mode="packs">Event Packs</button>
+            </div>
+          </details>
+          <details class="nav-folder">
+            <summary>Growth</summary>
+            <div class="nav-folder-items">
+              <button class="nav" type="button" data-mode="news">
+                <span>MarketPulse News</span><span class="learn-ai-mark"><span aria-hidden="true">✦</span> AI</span>
+              </button>
+              <button class="nav" data-mode="review">Review</button>
+            </div>
+          </details>
+          <details class="nav-folder">
+            <summary>Preferences</summary>
+            <div class="nav-folder-items">
+              <button class="nav" data-mode="account">Settings</button>
+            </div>
+          </details>
+        </nav>
+      </aside>
+      <div class="rail-hover-zone" id="railHoverZone" aria-hidden="true"></div>
+      <button
+        class="rail-collapse-toggle"
+        id="railCollapseToggle"
+        type="button"
+        aria-controls="sideMenu"
+        aria-expanded="true"
+        aria-label="Enable auto-hide menu"
+        title="Enable auto-hide menu"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m14.5 5-7 7 7 7"></path>
+        </svg>
+      </button>
+
+      <main>
+        <header class="topbar">
+          <button class="account topbar-account" id="levelButton" type="button" aria-label="Open progress and rewards">
+            <span class="account-identity">
+              <strong id="accountTitle">Your progress</strong><span id="accountTag" data-member-tag=""></span>
+              <span id="accountLevel">Level 1</span>
+            </span>
+            <div class="xp" aria-hidden="true"><span></span></div>
+            <small id="accountProgress">Open the level ladder</small>
+          </button>
+          <div class="metrics">
+            <div class="xp-metric" data-stat="xp" tabindex="0" role="group" aria-label="Rewards: XP, Credit Score">
+              <strong id="xp">1,840</strong><strong id="statusCoins" hidden>0</strong><strong id="statusCredit" hidden>—</strong><span class="xp-label">XP</span>
+            </div>
+            <div class="streak-menu" id="streakMenu">
+              <button
+                class="streak-trigger"
+                id="streakTrigger"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="streakPopover"
+                aria-expanded="false"
+              >
+                <strong id="streak">12</strong>
+                <span>day streak</span>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"></path></svg>
+              </button>
+              <section
+                class="streak-popover"
+                id="streakPopover"
+                role="dialog"
+                aria-label="Day streak calendar"
+                aria-hidden="true"
+                hidden
+              >
+                <div id="streakAccountCalendar">
+                <header class="streak-popover-head">
+                  <span><strong id="streakPopoverCount">12</strong> day streak</span>
+                  <small id="streakDailyProgress" title="Answer at least 15 Free Play puzzles each day. Correct and incorrect answers both count.">Today: 0/15 Free Play answers</small>
+                </header>
+                <span class="streak-linked-nav" role="group" aria-label="Move both month views">
+                  <button class="streak-panel-arrow" id="streakLinkedPrev" type="button" aria-label="Previous seven months in both views">&larr;</button>
+                  <small>Both</small>
+                  <button class="streak-panel-arrow" id="streakLinkedNext" type="button" aria-label="Next seven months in both views">&rarr;</button>
+                </span>
+                <div
+                  class="streak-month-picker"
+                  id="streakMonthPicker"
+                  aria-label="Monthly consistency. Swipe or drag the months sideways, then select a month to see its daily activity."
+                  tabindex="0"
+                >
+                  <span class="streak-month-picker-head">
+                    <button class="streak-panel-arrow" id="streakMonthPrev" type="button" aria-label="Show previous seven months">&larr;</button>
+                    <span class="streak-month-year" id="streakMonthYear"></span>
+                    <button class="streak-panel-arrow" id="streakMonthNext" type="button" aria-label="Show next seven months">&rarr;</button>
+                  </span>
+                  <span
+                    class="streak-month-strip"
+                    id="streakMonthStrip"
+                    role="group"
+                    aria-label="Choose a month to see its daily activity."
+                  ></span>
+                </div>
+                <div
+                  class="streak-calendar"
+                  id="streakCalendarPanel"
+                  aria-label="Calendar. Scroll or use left and right arrows to change the month and keep it selected in the monthly view."
+                  tabindex="0"
+                >
+                  <span class="streak-calendar-head">
+                    <button class="streak-panel-arrow" id="streakCalendarPrev" type="button" aria-label="Previous calendar month">&larr;</button>
+                    <small class="streak-calendar-month" id="streakMonthLabel"></small>
+                    <button class="streak-panel-arrow" id="streakCalendarNext" type="button" aria-label="Next calendar month">&rarr;</button>
+                  </span>
+                  <span class="streak-calendar-weekdays" aria-hidden="true">
+                    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                  </span>
+                  <span class="streak-calendar-days" id="streakCalendar" role="grid" aria-label="Monthly streak activity"></span>
+                </div>
+                </div>
+              </section>
+            </div>
+            <div class="accuracy-menu" id="accuracyTrigger" role="button" tabindex="0" aria-controls="accuracyPopover" aria-expanded="false" aria-label="Choose accuracy modes">
+              <strong id="accuracy" aria-live="polite">—</strong><span>accuracy</span>
+              <section class="accuracy-popover" id="accuracyPopover" role="group" aria-labelledby="accuracyHeading" hidden>
+                <h3 id="accuracyHeading">Accuracy</h3>
+                <p id="accuracyDescription">Average the checked modes. Unplayed modes are left out.</p>
+                <fieldset aria-describedby="accuracyDescription">
+                  <legend class="sr-only">Include modes in header accuracy</legend>
+                  <label><input type="checkbox" value="free" checked><span>Free Play</span><output data-accuracy-mode="free">Not played</output></label>
+                  <label><input type="checkbox" value="ranked" checked><span>Ranked</span><output data-accuracy-mode="ranked">Not played</output></label>
+                  <label><input type="checkbox" value="daily" checked><span>Daily Puzzle</span><output data-accuracy-mode="daily">Not played</output></label>
+                </fieldset>
+                <p class="accuracy-summary" id="accuracySummary" aria-live="polite"></p>
+              </section>
+            </div>
+            <span class="topbar-tools" role="group" aria-label="Header tools">
+              <button class="topbar-tool" id="settingsShortcut" type="button" aria-label="Open settings" title="Settings">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"></path>
+                  <path d="M19.43 12.98c.04-.32.07-.65.07-.98s-.03-.66-.07-.98l2.11-1.65-2-3.46-2.49 1a7.55 7.55 0 0 0-1.7-.99L15 3.25h-4l-.35 2.67c-.61.25-1.18.58-1.7.99l-2.49-1-2 3.46 2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65 2 3.46 2.49-1c.52.41 1.09.74 1.7.99L11 20.75h4l.35-2.67c.61-.25 1.18-.58 1.7-.99l2.49 1 2-3.46-2.11-1.65Z"></path>
+                </svg>
+              </button>
+              <span class="appearance-menu" id="appearanceMenu">
+                <button class="topbar-tool" id="appearanceToggle" type="button" aria-label="Appearance" aria-controls="appearancePopover" aria-expanded="false" title="Appearance">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+                <span class="appearance-popover" id="appearancePopover" role="group" aria-labelledby="appearanceHeading" hidden>
+                  <span class="appearance-content">
+                  <span class="appearance-heading" id="appearanceHeading">Appearance</span>
+                  <span class="theme-options">
+                    <button class="active" type="button" data-theme-choice="light" aria-pressed="true">Light</button>
+                    <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+                    <button type="button" data-theme-choice="gamify" aria-pressed="false">Gamify</button>
+                  </span>
+                  <span class="animation-options" role="group" aria-labelledby="animationHeading" aria-describedby="animationNotice">
+                    <span class="appearance-heading" id="animationHeading">Animations</span>
+                    <label><input type="checkbox" data-animation-option="xp" checked><span>XP animations</span></label>
+                    <label><input type="checkbox" data-animation-option="correct" checked><span>Correct predictions</span></label>
+                    <label><input type="checkbox" data-animation-option="trail" checked><span>Cursor trail</span></label>
+                    <label><input type="checkbox" data-animation-option="graph" checked><span>Cursor graph lines</span></label>
+                    <span id="animationNotice">Saved on this device. Turning animations off does not affect XP or scoring.</span>
+                  </span>
+                  <span class="cloud-weather-options">
+                    <span class="appearance-heading">Local weather clouds</span>
+                    <button class="secondary" id="cloudWeatherToggle" data-cloud-weather-toggle type="button" aria-pressed="false" aria-describedby="cloudWeatherPrivacy cloudWeatherStatus">Use my weather</button>
+                    <span id="cloudWeatherStatus" data-cloud-weather-status role="status">Match Gamify clouds to your local weather.</span>
+                    <span id="cloudWeatherPrivacy">With permission, approximate location is sent to <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>. This app does not save your location.</span>
+                  </span>
+                  </span>
+                </span>
+              </span>
+              <button class="topbar-tool is-muted" id="headerSoundToggle" type="button" aria-label="Interface sounds" aria-pressed="false" title="Unmute interface sounds">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><g class="sound-speaker"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 8a5 5 0 0 1 0 8m3-11a9 9 0 0 1 0 14"/></g><path class="sound-mute-slash" d="m3 3 18 18"/></svg>
+              </button>
+            </span>
+          </div>
+        </header>
+
+        <section class="symbol-results-page" id="symbolResultsPage" aria-labelledby="symbolResultsTitle" hidden>
+          <div class="symbol-results-head">
+            <button class="symbol-results-back" id="symbolResultsBack" type="button" aria-label="Back to Free Play">Back to Free Play</button>
+            <div>
+              <span>Free Play company search</span>
+              <h1 id="symbolResultsTitle">Choose a market symbol</h1>
+              <p id="symbolResultsSummary">Select the company or market you meant.</p>
+            </div>
+          </div>
+          <form class="symbol-results-search" id="symbolResultsForm" autocomplete="off">
+            <label for="symbolResultsInput">Search again</label>
+            <div>
+              <input id="symbolResultsInput" type="search" maxlength="80" />
+              <button type="submit">Find matches</button>
+            </div>
+          </form>
+          <div class="symbol-results-list" id="symbolResultsList" aria-live="polite"></div>
+        </section>
+
+        <section class="workspace">
+          <div class="chart-panel">
+            <div class="chart-head">
+              <div>
+                <small id="modeLabel">FREE PLAY</small>
+                <h2 id="challengeTitle"><span class="chart-ticker"><span class="chart-loading-label"><i class="loading-word">Loading<i class="loading-dots"><i>…</i></i></i></span></span><span class="chart-company-name">&nbsp;</span></h2>
+              </div>
+              <div class="market-controls">
+                <label class="asset-select-label">
+                  <span>Practice</span>
+                  <select id="assetSelect" class="loading-placeholder" aria-label="Investment type">
+                    <option value="" disabled selected>Loading…</option>
+                    <option value="stocks">Stocks</option>
+                    <option value="crypto">Crypto</option>
+                    <option value="forex">Forex</option>
+                    <option value="indices">Indices</option>
+                    <option value="etfs">ETFs</option>
+                    <option value="commodities">Commodities</option>
+                    <option value="futures">Futures</option>
+                    <option value="bonds">Bonds</option>
+                    <option value="macro">Macro data</option>
+                  </select>
+                  <i class="asset-loading-label" aria-hidden="true"><i class="loading-word">Loading<i class="loading-dots"><i>…</i></i></i></i>
+                </label>
+                <form id="tickerForm" autocomplete="off">
+                  <button id="mobileSearchToggle" type="button" aria-label="Open chart search" aria-expanded="false" aria-controls="tickerSearchField">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></svg>
+                  </button>
+                  <div class="ticker-search-field" id="tickerSearchField">
+                    <label for="tickerInput">Search</label>
+                    <div class="symbol-search">
+                      <svg class="mobile-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></svg>
+                      <input id="tickerInput" form="tickerForm" value="" placeholder="Company or ticker" maxlength="80" inputmode="search" enterkeyhint="search" aria-label="Company or ticker" aria-controls="suggestions" aria-expanded="false" />
+                      <div id="suggestions" class="suggestions" role="listbox" hidden></div>
+                    </div>
+                    <button id="mobileSearchClose" type="button" aria-label="Close chart search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div id="symbolStatus" class="symbol-status" aria-live="polite"><i class="loading-word">Loading<i class="loading-dots"><i>…</i></i></i></div>
+            <div class="chart-shell">
+              <div class="chart-topbar">
+                <div class="timeframes primary-timeframes" aria-label="Timeframe">
+                  <button type="button" data-timeframe="1m">1m</button>
+                  <button type="button" data-timeframe="1h">1h</button>
+                  <button type="button" data-timeframe="1D">1D</button>
+                  <button type="button" data-timeframe="1W" title="One week of prices">1W</button>
+                  <button class="active" type="button" data-timeframe="3M">3M</button>
+                  <button type="button" data-timeframe="1Y">1Y</button>
+                  <button type="button" data-timeframe="All" title="All available price history">All</button>
+                  <button id="advancedToggle" type="button" title="Show month options" aria-label="Show month options" aria-expanded="false" aria-controls="advancedIntervals"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button>
+                </div>
+                <div class="chart-modes" id="chartDisplayOptions" aria-label="Chart display">
+                  <button class="active" type="button" data-chart-type="candles" title="Candlestick chart">Candles</button>
+                  <button type="button" data-chart-type="line" title="Line chart">Line</button>
+                  <button type="button" data-indicator="sma" title="Simple moving average">SMA</button>
+                  <button type="button" data-indicator="ema" title="Exponential moving average">EMA</button>
+                  <button type="button" data-indicator="bb" title="Bollinger Bands">BB</button>
+                  <button class="active" type="button" data-indicator="volume" title="Volume bars">Vol</button>
+                  <button class="drawing-toggle" id="drawingToolsToggle" type="button" aria-controls="drawingTools" aria-expanded="false" title="Show chart drawing tools">Draw</button>
+                </div>
+              </div>
+              <div class="advanced-intervals" id="advancedIntervals" aria-label="Month options" hidden>
+                <button type="button" data-timeframe="2m">2m</button>
+                <button type="button" data-timeframe="3m">3m</button>
+                <button type="button" data-timeframe="5m">5m</button>
+                <button type="button" data-timeframe="10m">10m</button>
+                <button type="button" data-timeframe="15m">15m</button>
+                <button type="button" data-timeframe="30m">30m</button>
+                <button type="button" data-timeframe="45m">45m</button>
+                <button type="button" data-timeframe="2h">2h</button>
+                <button type="button" data-timeframe="3h">3h</button>
+                <button type="button" data-timeframe="4h">4h</button>
+                <button type="button" data-timeframe="5D">5D</button>
+                <button type="button" data-timeframe="1d" data-historical-only title="Each candle represents one day">1D bars</button>
+                <button type="button" data-timeframe="2W" title="Two weeks of prices">2W</button>
+                <button type="button" data-timeframe="1w" data-historical-only title="Each candle represents one week">1W bars</button>
+                <button type="button" data-timeframe="1M">1M</button>
+                <button type="button" data-timeframe="6M">6M</button>
+                <button type="button" data-timeframe="1mo" data-historical-only title="Each candle represents one month">1M bars</button>
+                <button type="button" data-timeframe="3mo" data-historical-only title="Each candle represents three months">3M bars</button>
+                <button type="button" data-timeframe="6mo" data-historical-only title="Each candle represents six months">6M bars</button>
+                <button type="button" data-timeframe="5Y">5Y</button>
+                <button type="button" data-timeframe="YTD" title="Year to date">YTD</button>
+                <button type="button" data-timeframe="12mo" data-historical-only title="Each candle represents one year">1Y bars</button>
+              </div>
+              <div class="chart-toolbar" role="group" aria-label="Chart controls">
+                <div class="chart-toolbar-group chart-drawing-actions" role="group" aria-label="Drawing actions">
+                  <button id="undoDrawing" type="button" aria-label="Undo drawing change" title="Undo the last drawing, deletion, or clear" disabled>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 4 10l5 5M4 10h10a6 6 0 0 1 0 12" transform="translate(0 -2)" /></svg>
+                  </button>
+                  <button type="button" data-tool="delete" aria-label="Eraser" aria-pressed="false" title="Eraser: click or drag across drawings to erase; click again to deselect">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 3 6 6a2 2 0 0 1 0 3l-8 8H7l-4-4a2 2 0 0 1 0-3L13 3a1.5 1.5 0 0 1 2 0ZM8 8l9 9M13 20h8" /></svg>
+                  </button>
+                  <button type="button" data-tool="cursor" aria-label="Cursor" aria-pressed="true" title="Cursor: stop drawing and interact with the chart">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2.5v18l4.3-4.3 3 6.1 2.5-1.2-3-6.1H18L5 2.5Z" /></svg>
+                    <img class="gamify-cursor-icon" src="./assets/cartoon-glove-cursor.svg?v=32" width="18" height="18" alt="" aria-hidden="true" />
+                  </button>
+                  <button id="clearDrawings" type="button" aria-label="Clear all drawings" title="Clear all drawings (can be undone)" disabled>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7" /></svg>
+                  </button>
+                </div>
+                <button id="mobileChartDraw" class="mobile-chart-control" type="button" aria-controls="drawingTools" aria-expanded="false">Draw</button>
+                <div class="chart-toolbar-group" role="group" aria-label="Chart zoom">
+                  <button id="zoomIn" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+                  <button id="zoomOut" type="button" aria-label="Zoom out" title="Zoom out">−</button>
+                  <button id="resetChart" type="button" title="Reset chart zoom and position">Reset</button>
+                  <button id="mobileChartClose" class="mobile-chart-control" type="button" aria-label="Exit expanded chart" title="Exit expanded chart">×</button>
+                </div>
+              </div>
+              <div class="chart-stage">
+                <div class="drawing-rail" id="drawingTools" aria-label="Drawing tools" hidden>
+                  <button type="button" data-tool="trend" title="Trendline">Trend</button>
+                  <button type="button" data-tool="ray" title="Ray">Ray</button>
+                  <button type="button" data-tool="horizontal" title="Horizontal price level">Price</button>
+                  <button type="button" data-tool="vertical" title="Vertical time marker">Time</button>
+                  <button type="button" data-tool="fib" title="Fibonacci retracement">Fib</button>
+                  <button type="button" data-tool="channel" title="Parallel channel">Channel</button>
+                  <button type="button" data-tool="long" title="Long position risk/reward">Long</button>
+                  <button type="button" data-tool="short" title="Short position risk/reward">Short</button>
+                  <button type="button" data-tool="rect" title="Rectangle zone">Box</button>
+                  <button type="button" data-tool="ellipse" title="Ellipse zone">Oval</button>
+                  <button type="button" data-tool="arrow" title="Arrow annotation">Arrow</button>
+                  <button type="button" data-tool="brush" title="Freehand brush">Brush</button>
+                  <button type="button" data-tool="text" title="Text note">Text</button>
+                  <button type="button" data-tool="measure" title="Ruler: measure time, price, and percentage">Ruler</button>
+                </div>
+                <div class="chart-canvas-wrap">
+                  <canvas id="chart" width="1120" height="560"></canvas>
+                  <div class="review-chart-prompt" role="status">choose a new puzzle</div>
+                  <div class="chart-loading hidden" id="chartLoading" aria-live="polite">
+                    <div class="skeleton-line wide"></div>
+                    <div class="skeleton-grid">
+                      <span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <strong>Fetching market <i class="loading-word">data<i class="loading-dots"><i>...</i></i></i></strong>
+                  </div>
+                  <div id="chartTip" class="chart-tip" hidden></div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline">
+              <span id="chartCitation"><i class="loading-word">Loading<i class="loading-dots"><i>…</i></i></i></span>
+              <span id="revealTag" hidden></span>
+            </div>
+          </div>
+
+          <aside class="panel">
+            <div class="mode-surface" id="modeSurface"></div>
+            <div class="choices" id="choices"></div>
+            <section class="ranked-coins" id="rankedCoins" aria-label="Ranked entry and betting" hidden></section>
+            <div class="review-actions" id="reviewActions" role="group" aria-label="Review chart actions" hidden>
+              <button id="reviewHintBtn" class="secondary" type="button" aria-expanded="false" aria-controls="reviewHint">Hint</button>
+              <button id="reviewStatusBtn" class="secondary" type="button" aria-pressed="false">Needs review</button>
+            </div>
+            <button id="nextBtn" class="secondary">Next chart</button>
+            <div class="result" id="reviewHint" role="region" aria-label="Chart hint" hidden></div>
+            <div class="result" id="result" aria-live="polite"></div>
+          </aside>
+        </section>
+
+        <section class="lower">
+          <div id="scenarioLibraryPanel" class="scenario-library-panel">
+            <div class="section-head">
+              <h3>Scenario Library</h3>
+            </div>
+            <div class="packs" id="packLibrary">
+              <button data-pack="2008">2008 crash</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+    <aside class="paper-ledger" id="paperLedger" aria-label="Paper trading ledger" hidden>
+      <button class="paper-ledger-toggle" id="paperLedgerToggle" type="button" aria-label="Open trade ledger" aria-controls="paperLedgerPanel" aria-expanded="false" title="Trade ledger: drag up or down to move; use arrow keys when focused">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 3H20v19H6.5A2.5 2.5 0 0 1 4 19.5v-14A2.5 2.5 0 0 1 6.5 3Z"/><path d="M8 3v14m3-9h5m-5 4h5"/></svg>
+      </button>
+      <section class="paper-ledger-panel" id="paperLedgerPanel" aria-labelledby="paperLedgerTitle" hidden>
+        <header class="paper-ledger-head"><h2 id="paperLedgerTitle">Trade ledger</h2><button id="paperLedgerClose" type="button" aria-label="Close trade ledger">&times;</button></header>
+        <p class="paper-ledger-summary" id="paperLedgerSummary"></p>
+        <div class="paper-order-list" id="paperLedgerOrders" tabindex="0" role="region" aria-label="Saved purchases and sales"></div>
+      </section>
+    </aside>
+    <dialog class="mobile-chart-dialog" id="mobileChartDialog" aria-label="Expanded chart"></dialog>
+    <script src="./market-celebrations.js?v=8"></script>
+    <script src="./up-celebration.js?v=3"></script>
+    <script src="./down-celebration.js?v=11"></script>
+    <script src="./sideways-celebration.js?v=3"></script>
+    <script src="./xp-orbs.js?v=24"></script>
+    <script src="./coin-rewards.js?v=9"></script>
+    <script src="./result-history.js?v=4"></script>
+    <script src="./daily-puzzles.js?v=5"></script>
+    <script src="./i18n.js?v=6"></script>
+    <script src="./marketpulse.js?v=1"></script>
+    <script src="./marketpulse-news.js?v=4"></script>
+    <script src="./script.js?v=414"></script>
+    <script src="/pretium-ai.js?v=3" defer></script>
+  </body>
+</html>

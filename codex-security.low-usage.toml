@@ -1,0 +1,9 @@
+# Shared desktop-plugin profile. Install once per developer with:
+# python scripts/configure-security-scans.py
+# Applies to new deep scans only; this is not a token or billing cap.
+[deep_scan]
+workers = 1
+subagents = 0
+stop_after_no_new = 2
+max_discovery_runs = 2
+max_time_hours = 1

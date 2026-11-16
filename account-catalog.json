@@ -1,0 +1,197 @@
+{
+  "packs": {
+    "2008": {
+      "start": "2007-07-01",
+      "end": "2009-06-30",
+      "symbols": [
+        "^GSPC",
+        "XLF",
+        "C",
+        "BAC",
+        "AIG",
+        "TLT",
+        "GLD",
+        "CL=F",
+        "EURUSD=X"
+      ]
+    },
+    "covid": {
+      "start": "2020-01-01",
+      "end": "2021-03-31",
+      "symbols": [
+        "SPY",
+        "QQQ",
+        "AAL",
+        "ZM",
+        "MRNA",
+        "TLT",
+        "GLD",
+        "CL=F",
+        "BTC-USD"
+      ]
+    },
+    "gme": {
+      "start": "2020-12-01",
+      "end": "2021-04-30",
+      "symbols": [
+        "GME",
+        "AMC",
+        "BB",
+        "NOK",
+        "KOSS",
+        "^VIX",
+        "SPY"
+      ]
+    },
+    "dotcom": {
+      "start": "1999-01-01",
+      "end": "2002-12-31",
+      "symbols": [
+        "^IXIC",
+        "QQQ",
+        "CSCO",
+        "AMZN",
+        "MSFT",
+        "INTC",
+        "SPY"
+      ]
+    },
+    "fed2022": {
+      "start": "2021-11-01",
+      "end": "2023-03-31",
+      "symbols": [
+        "TLT",
+        "IEF",
+        "QQQ",
+        "SPY",
+        "DX-Y.NYB",
+        "EURUSD=X",
+        "GC=F"
+      ]
+    },
+    "oil2020": {
+      "start": "2020-01-01",
+      "end": "2020-12-31",
+      "symbols": [
+        "CL=F",
+        "USO",
+        "XOM",
+        "CVX",
+        "SPY",
+        "CAD=X",
+        "GC=F"
+      ]
+    },
+    "crypto2022": {
+      "start": "2021-11-01",
+      "end": "2023-01-31",
+      "symbols": [
+        "BTC-USD",
+        "ETH-USD",
+        "COIN",
+        "MARA",
+        "RIOT",
+        "QQQ"
+      ]
+    },
+    "brexit": {
+      "start": "2016-04-01",
+      "end": "2016-12-31",
+      "symbols": [
+        "GBPUSD=X",
+        "EURGBP=X",
+        "EWU",
+        "^FTSE",
+        "FXB",
+        "GC=F"
+      ]
+    },
+    "tech2023": {
+      "start": "2022-10-01",
+      "end": "2024-03-31",
+      "symbols": [
+        "NVDA",
+        "AMD",
+        "MSFT",
+        "GOOGL",
+        "SMH",
+        "QQQ",
+        "^IXIC"
+      ]
+    },
+    "vol2018": {
+      "start": "2017-10-01",
+      "end": "2018-06-30",
+      "symbols": [
+        "^VIX",
+        "SVXY",
+        "SPY",
+        "QQQ",
+        "TLT",
+        "GLD"
+      ]
+    }
+  },
+  "lessons": [
+    [
+      1,
+      0,
+      2
+    ],
+    [
+      2,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      2
+    ],
+    [
+      2,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      2
+    ],
+    [
+      2,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      2
+    ],
+    [
+      2,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      2
+    ],
+    [
+      1,
+      0,
+      2
+    ],
+    [
+      2,
+      1,
+      0
+    ],
+    [
+      2,
+      0,
+      1
+    ]
+  ]
+}
